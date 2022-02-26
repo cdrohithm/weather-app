@@ -1,0 +1,41 @@
+.weather-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.weather {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    /* background-color: antiquewhite; */
+    margin-top: 10px;
+}
+.currentTemperature > h1 {
+    font-size: 80px;
+}
+.temperatures, .other, .description { 
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    /* justify-content: flex-end; */
+    gap: 10px;
+}
+.temperatures > p {
+    font-size: medium;
+    font-weight: 500;    
+}
+.description > h3 {
+    text-transform: capitalize;
+}
+.mapboxgl-ctrl-attrib-inner {
+    display: none;
+}
+#map {
+    height: 100%;
+    width: 100%;
+}

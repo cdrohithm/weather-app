@@ -15,7 +15,7 @@ function Weather(props) {
     }
     useEffect(() => {
         if (weather?.coordinates) {
-            mapboxgl.accessToken = 'pk.eyJ1IjoiY2Ryb2hpdGhtIiwiYSI6ImNsMDJkN3JieDA0dGszZXAzZXp2NHVqZ3AifQ.ul8OsVLtpm4OuBcdukQVvA';
+            mapboxgl.accessToken = process.env.REACT_APP_ACCESS_TOKEN;
             map.current = new mapboxgl.Map({
                 container: 'map',
                 style: 'mapbox://styles/mapbox/streets-v11',

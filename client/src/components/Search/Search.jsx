@@ -26,6 +26,12 @@ function Search(props) {
                 });
         }
     }
+    const handleKeyPress = e => {
+        console.log(e)
+        if (e?.key?.toLowerCase() === "enter") {
+            handleSubmit();
+        }
+    }
     const handleChange = e => {
         const { value } = e.target;
         setCity(value)
@@ -36,6 +42,7 @@ function Search(props) {
                 type="text"
                 value={city}
                 onChange={handleChange} 
+                onKeyPress={handleKeyPress}
             />
             <button onClick={handleSubmit}>Search</button>
         </div>

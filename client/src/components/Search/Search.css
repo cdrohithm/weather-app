@@ -12,4 +12,11 @@
     padding: 6px;
     background-color: none;
     border: none;
+    margin-right: 10px;
+}
+.search > .current {
+    background-color: none;
+    margin-right: 10px;
+    /* border: 1px solid gray; */
+    padding: 5px;
 }

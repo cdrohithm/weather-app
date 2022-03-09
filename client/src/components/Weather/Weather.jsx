@@ -14,7 +14,7 @@ function Weather(props) {
         return Math.round(temperatureInCelsius.toFixed(3))
     }
     useEffect(() => {
-        if (weather?.coordinates) {
+        if (weather?.coordinates && process.env.REACT_APP_ACCESS_TOKEN) {
             mapboxgl.accessToken = process.env.REACT_APP_ACCESS_TOKEN;
             map.current = new mapboxgl.Map({
                 container: 'map',

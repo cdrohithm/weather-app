@@ -5,23 +5,28 @@ import axios from "axios";
 import navigation from "./navigation.png";
 import "./Search.css";
 import WeatherContext from "../../context/WeatherContext";
+import Loader from "../Loader/Loader";
 
 function Search(props) {
     const [city, setCity] = useState('');
+    const [loader, setLoader] = useState(false);
     const history = useNavigate();
 
     const { state, setState } = useContext(WeatherContext)
     const handleSubmit = () => {
-        setState( {...state, weather: null });
+        setState({ ...state, weather: null });
+        setLoader(true);
         if (city) {
             axios
                 .get('https://weather-webapp-server.herokuapp.com/weather/' + city)
                 .then(res => {
+                    setLoader(false);
                     setState({ ...state, weather: res?.data });
                     history('/weather/' + city);
                 })
                 .catch(err => {
                     console.log(err.message);
+                    setLoader(false)
                     alert(err?.response?.data?.message || err?.message)
                 });
         }
@@ -37,6 +42,7 @@ function Search(props) {
         setCity(value)
     }
     const handleLocation = () => {
+        setLoader(true)
         navigator.geolocation.getCurrentPosition(function(position) {
             let lat = position?.coords?.latitude;
             let long = position?.coords?.longitude;
@@ -46,17 +52,20 @@ function Search(props) {
                 .then(res => {
                     console.log(res?.data)
                     setState({ ...state, weather: res?.data });
+                    setLoader(false)
                     const city = res?.data?.name;
                     history('/weather/' + city);
                 })
                 .catch(err => {
                     console.log(err.message);
+                    setLoader(false);
                     alert(err?.response?.data?.message || err?.message)
                 });
             }
         });
     }
     return (
+      <>
         <div className="search">
             <div className="current" onClick={handleLocation}>
                 <img height="18" width="18" src={navigation} />
@@ -69,6 +78,10 @@ function Search(props) {
             />
             <button onClick={handleSubmit}>Search</button>
         </div>
+        <div className="position">
+          {loader ? <Loader /> : ("")}
+          </div>
+      </>
     )
 }
 
